@@ -6,3 +6,22 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+#postComponent{
+    width: 60%
+}
+
+#commentComponent{
+    width: 60%
+}
+
+@media only screen and (max-width: 1000px) {
+
+    #postComponent{
+        width: 100% !important;
+    }
+
+    #commentComponent{
+        width: 100% !important;
+    }
+}

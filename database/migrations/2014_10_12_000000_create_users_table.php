@@ -13,15 +13,26 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        /*Schema::create('users', function (Blueprint $table) {
+            $table->integer('id');
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-        });
+        });*/
+
+        DB::statement('create table users(
+            id int(255) auto_increment not null,
+            name varchar(255),
+            email varchar(255),
+            password varchar(255),
+            remember_token varchar(255),
+            created_at datetime,
+            updated_at datetime,
+            constraint pk_users PRIMARY KEY(id)
+        );');
     }
 
     /**

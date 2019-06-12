@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', 'welcomeController@index')->name('welcome');
 
 // Route to get auth user data
@@ -47,3 +36,6 @@ Route::prefix('valorar')->group(function () {
     Route::delete('/like/{post_id}', 'RateController@deleteLike');
     Route::delete('/dislike/{post_id}', 'RateController@deleteDislike');
 });
+
+// Route to select and notify winner
+Route::post('winner', 'WinnerController@index')->name('winner');

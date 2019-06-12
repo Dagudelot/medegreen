@@ -59,6 +59,12 @@
                                 <li class="nav_item">
                                     <a class="btn btn-outline-success bg-light mx-4" href="/ranking">Ver ranking<a>
                                 </li>
+                            @else
+                                <li>
+                                    <p class="text-white mx-5" style="font-size: 20px">
+                                        Puntos: {{ \Auth::user()->puntos }}
+                                    </p>
+                                </li>
                             @endif
 
                             <li class="nav_item">

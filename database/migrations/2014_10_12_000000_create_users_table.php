@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             name varchar(255),
             role varchar(255),
             profile_pic varchar(255),
+            puntos int(255) default 0,
             email varchar(255),
             password varchar(255),
             remember_token varchar(255),

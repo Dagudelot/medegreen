@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
+
 use App\Publicacion;
 use App\Media;
+use App\Like;
 use App\Comentario;
 
 use Illuminate\Http\Request;
@@ -99,6 +102,25 @@ class PostController extends Controller
     {
         Media::where('publicacion_id', $id)->first()->delete();
         Publicacion::find($id)->delete();
+    }
+
+    public function getRanking(){
+        if(\Auth::user()->role != 'admin'){
+            return back();
+        }
+
+        $posts_ids = DB::select('select post_id from likes group by post_id order by count(*) desc;');
+        // Casting from stdClass to int
+        $posts_ids = json_decode(json_encode($posts_ids), true);
+
+        $posts = Publicacion::whereIn('id', [])->get();
+
+        for($i = 0; $i < count($posts_ids); $i++){
+            $post = Publicacion::where('id', $posts_ids[$i])->first();
+            $posts->push($post);
+        }
+
+        return view('ranking')->with('posts', $posts);
     }
 
     private function getFileType($ext){

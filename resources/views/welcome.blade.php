@@ -52,7 +52,8 @@
 
 	<!-- //google fonts -->
 
-	<link href="{{ asset('images/logo.png') }}" />
+	<!-- Icon -->
+	<link href="{{ asset('images/logo.png') }}" rel="icon">
 	
 
 </head>
@@ -316,7 +317,7 @@
 
 						<!-- banner form -->
 
-						<form action="{{ route('register') }}" method="POST">
+						<form action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
 						@csrf
 
 							<h5 class="mb-3">Unete a la comunidad</h5>
@@ -331,7 +332,11 @@
 
 								<input placeholder="Confirmar contraseña" name="password_confirmation" type="password" required>
 
-								
+								<div class="custom-file mb-3">
+									<input type="file" class="custom-file-input" id="validatedCustomFile" name="profile_pic" >
+									<label class="custom-file-label" for="validatedCustomFile">Selecciona foto / video.</label>
+									<div class="invalid-feedback">Selecciona un archivo valido</div>
+								</div>
 
 								<button class="btn">Registrate</button>
 
@@ -479,7 +484,7 @@
 
 			<div class="row text-center">
 
-				<div class="col-lg-3 col-6">
+				<div class="col-lg-4 col-sm-12">
 
 					<div class="w3layouts_stats_left w3_counter_grid">
 
@@ -497,7 +502,7 @@
 
 				</div>
 
-				<div class="col-lg-3 col-6">
+				<div class="col-lg-4 col-sm-12">
 
 					<div class="w3layouts_stats_left w3_counter_grid2">	
 
@@ -515,25 +520,7 @@
 
 				</div>
 
-				<div class="col-lg-3 col-6 mt-lg-0 mt-4">
-
-					<div class="w3layouts_stats_left w3_counter_grid1">	
-
-						<div class="stats-icon">
-
-							<i class="fas fa-check-double"></i>
-
-						</div>
-
-						<p class="counter">17</p>
-
-						<p class="para-text-w3ls">Propuestas aprovadas</p>
-
-					</div>
-
-				</div>
-
-				<div class="col-lg-3 col-6 mt-lg-0 mt-4">
+				<div class="col-lg-4 col-sm-12">
 
 					<div class="w3layouts_stats_left w3_counter_grid1">	
 
@@ -573,7 +560,7 @@
 
 				<div class="footer-title mb-3">
 
-					<a ><img src="images/s2.png" alt=""> MedeGreen</a>
+					<a style="color: white"><img src="images/s2.png" alt=""> MedeGreen</a>
 
 				</div>
 

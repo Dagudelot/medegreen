@@ -12,8 +12,10 @@
                 </div>
             </div>
 
+            <img v-bind:src="user_profile_pic_path" alt="profile_pic" class="avatar my-2">
             <h5 class="card-title">{{ post.usuario.name }}</h5>
-            <input type="text" class="form-control" v-if="editMode" v-model="post.descripcion">
+            
+            <textarea  v-if="editMode" v-model="post.descripcion" cols="30" rows="5" style="width: 100%"></textarea>
             <p class="card-text" v-else>{{ post.descripcion }}</p>
             
             <p class="card-text text-muted">{{ moment().startOf(post.created_at).fromNow() }}</p>
@@ -37,6 +39,9 @@
         async mounted() {            
             const user = await axios.get('/user');
             this.authUser = user.data;
+            if(this.post.usuario.profile_pic){
+                this.user_profile_pic_path = '/storage/profile_pics/'+this.post.usuario.email+'/'+this.post.usuario.profile_pic;
+            }
             if(this.checkIfUserLiked() == true){
                 this.likedBtn = 'col-lg-12 btn btn-success';
             }
@@ -51,6 +56,7 @@
                 authUser: {
                     id: null,
                 },
+                user_profile_pic_path: 'http://127.0.0.1:8000/images/no_profile_pic.jpg',
                 editMode: false,
                 moment: moment,
                 likedBtn: 'col-lg-12 btn btn-outline-success',

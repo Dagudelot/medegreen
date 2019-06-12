@@ -54,7 +54,23 @@
                                 </li>
                             @endif
                         @else
+
+                            @if(\Auth::user()->role == 'admin')
+                                <li class="nav_item">
+                                    <a class="btn btn-outline-success bg-light mx-4" href="ranking">Ver ranking<a>
+                                </li>
+                            @endif
+
+                            <li class="nav_item">
+                                @if(\Auth::user()->profile_pic)
+                                    <img src="{{ asset('storage/profile_pics/'.\Auth::user()->email.'/'.\Auth::user()->profile_pic) }}" alt="user_avatar" class="avatar">
+                                @else
+                                    <img src="{{ asset('images/no_profile_pic.jpg') }}" alt="user_avatar" class="avatar">
+                                @endif                            
+                            </li>
+
                             <li class="nav-item dropdown">
+
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>

@@ -26,6 +26,8 @@ class CreateUsersTable extends Migration
         DB::statement('create table users(
             id int(255) auto_increment not null,
             name varchar(255),
+            role varchar(255),
+            profile_pic varchar(255),
             email varchar(255),
             password varchar(255),
             remember_token varchar(255),

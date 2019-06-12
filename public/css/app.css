@@ -10646,12 +10646,33 @@ a.text-dark:focus {
   }
 }
 
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
 #postComponent {
   width: 60%;
 }
 
 #commentComponent {
   width: 60%;
+}
+
+.alert-warning {
+  background-color: #ff9800;
+  border-color: #cc7a00;
+  color: #fff;
+}
+
+.alert-warning hr {
+  border-top-color: #b36a00;
+}
+
+.alert-warning .alert-link {
+  color: #e6e6e6;
 }
 
 @media only screen and (max-width: 1000px) {

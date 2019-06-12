@@ -13,12 +13,17 @@
 
 Route::get('/', 'welcomeController@index')->name('welcome');
 
+// Route to get auth user data
 Route::get('/user', 'HomeController@getUser');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// Ranking
+Route::get('ranking', 'PostController@getRanking')->middleware('auth');
+
+// Route fot posts
 Route::prefix('publicaciones')->group(function () {
     Route::get('/', 'PostController@index');
     Route::get('/{id}', 'PostController@show');
@@ -35,6 +40,7 @@ Route::prefix('publicaciones')->group(function () {
     });
 });
 
+// Routes to like and dislike posts
 Route::prefix('valorar')->group(function () {
     Route::post('/like', 'RateController@addLike');
     Route::post('/dislike', 'RateController@addDislike');

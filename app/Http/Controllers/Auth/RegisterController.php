@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
@@ -50,6 +51,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'file' => ['file', 'mime:jpg,png,jpeg,JPG,PNG,JPEG'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -63,8 +65,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $name = null;
+
+        if(count($data) > 5){
+            $name = $data['profile_pic']->getClientOriginalName();
+            $ext = $data['profile_pic']->getClientOriginalExtension();
+            Storage::putFileAs('public/profile_pics/'.$data['email'].'/', $data['profile_pic'], $name);
+        }
+
         return User::create([
             'name' => $data['name'],
+            'profile_pic' => $name,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

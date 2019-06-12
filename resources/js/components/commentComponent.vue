@@ -8,7 +8,7 @@
             <p class="text-muted">{{ moment().startOf(comment.created_at).fromNow() }}</p>
         </div>
         <div class="card-body">
-            <input type="text" v-model="descripcion" v-if="editMode">
+            <textarea v-model="descripcion" v-if="editMode" style="width: 100%"></textarea>
             <p v-else>{{ descripcion }}</p>
         </div>
         <div class="footer">

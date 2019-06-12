@@ -57,7 +57,7 @@
 
                             @if(\Auth::user()->role == 'admin')
                                 <li class="nav_item">
-                                    <a class="btn btn-outline-success bg-light mx-4" href="ranking">Ver ranking<a>
+                                    <a class="btn btn-outline-success bg-light mx-4" href="/ranking">Ver ranking<a>
                                 </li>
                             @endif
 

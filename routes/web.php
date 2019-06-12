@@ -21,7 +21,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Ranking
-Route::get('ranking', 'PostController@getRanking')->middleware('auth');
+Route::get('/ranking', 'PostController@getRanking')->middleware('auth');
 
 // Route fot posts
 Route::prefix('publicaciones')->group(function () {

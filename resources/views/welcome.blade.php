@@ -375,21 +375,23 @@
 
 		<div class="row bottom-grids">
 
-			@forelse($medias as $media)
-				<div class="col-md-3 col-sm-6">
+			@if($medias->count() == 4)
+				@foreach($medias as $media)
+					<div class="col-md-3 col-sm-6">
 
-					<div class="three-grids-w3pvt-1 d-flex text-right" style="background: url({{  $media->link }}); background-size: cover">
+						<div class="three-grids-w3pvt-1 d-flex text-right" style="background: url({{  $media->link }}); background-size: cover">
 
-						<div class="text-effect-wthree midd-text-w3ls p-3 w-100">
+							<div class="text-effect-wthree midd-text-w3ls p-3 w-100">
 
-							<h5 class="text-capitalize text-bl font-weight-bold">{{ $media->publicacion->descripcion }}</h5>
+								<h5 class="text-capitalize text-bl font-weight-bold">{{ $media->publicacion->descripcion }}</h5>
+
+							</div>
 
 						</div>
 
 					</div>
-
-				</div>
-			@empty
+				@endforeach
+			@else
 				<div class="col-md-3 col-sm-6">
 
 					<div class="three-grids-w3pvt-1 d-flex text-right">
@@ -445,7 +447,7 @@
 					</div>
 
 				</div>
-			@endforelse
+			@endif
 
 			<div class="col-lg-6">
 

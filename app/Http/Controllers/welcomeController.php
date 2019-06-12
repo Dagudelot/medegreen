@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class welcomeController extends Controller
 {
     public function index (){
-        $medias = Media::where('mime', 'image')->orderBy('id', 'desc')->get();
+        $medias = Media::where('mime', 'image')->orderBy('id', 'desc')->take(4)->orderBy('id', 'desc')->get();
         return view('welcome')->with('medias', $medias);
     }
 }

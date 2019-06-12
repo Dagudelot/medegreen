@@ -34,7 +34,7 @@
         </div>
     @empty
         <div class="alert alert-warning m-t-1 text-xs-center" role="alert">
-            <i class="fa fa-bell-o fa-fw fa-lg"></i> This is a warning alert
+            <i class="fas fa-bell"></i> Ops. Aun no hay publicaciones calificadas.
         </div>
     @endforelse
 

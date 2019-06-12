@@ -21,11 +21,6 @@ class PostController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return[
@@ -34,12 +29,6 @@ class PostController extends Controller
         ];
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -63,12 +52,6 @@ class PostController extends Controller
         return Publicacion::where('id', $post->id)->with('usuario')->with('media')->with('likes')->with('dislikes')->with('comentarios')->get();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         return view('post')->with('post', Publicacion::where('id', $id)->with('usuario')->with('media')->with('likes')->with('dislikes')->with('comentarios')->first());
@@ -78,13 +61,6 @@ class PostController extends Controller
         return Comentario::where('publicacion_id', $id)->with('usuario')->get();
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request)
     {
         Publicacion::find($request->get('id'))->update([
@@ -92,12 +68,6 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         Media::where('publicacion_id', $id)->first()->delete();
@@ -109,16 +79,7 @@ class PostController extends Controller
             return back();
         }
 
-        $posts_ids = DB::select('select post_id from likes group by post_id order by count(*) desc;');
-        // Casting from stdClass to int
-        $posts_ids = json_decode(json_encode($posts_ids), true);
-
-        $posts = Publicacion::whereIn('id', [])->get();
-
-        for($i = 0; $i < count($posts_ids); $i++){
-            $post = Publicacion::where('id', $posts_ids[$i])->first();
-            $posts->push($post);
-        }
+        $posts = $this->getMostLikedPosts();
 
         return view('ranking')->with('posts', $posts);
     }
@@ -137,6 +98,21 @@ class PostController extends Controller
 
     private function getAllExtensions(){
         return array_merge(self::$IMAGE_EXTENSIONS, self::$VIDEO_EXTENSIONS);
+    }
+
+    private function getMostLikedPosts(){
+        $posts_ids = DB::select('select post_id from likes group by post_id order by count(*) desc;');
+        // Casting from stdClass to int
+        $posts_ids = json_decode(json_encode($posts_ids), true);
+
+        $posts = Publicacion::whereIn('id', [])->get();
+
+        for($i = 0; $i < count($posts_ids); $i++){
+            $post = Publicacion::where('id', $posts_ids[$i])->first();
+            $posts->push($post);
+        }
+
+        return $posts;
     }
 
 }
